@@ -170,7 +170,7 @@ export type Database = {
           },
         ]
       }
-      alerts_logs: {
+      alert_logs: {
         Row: {
           action: string | null
           alert_payload: Json
