@@ -27,6 +27,25 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  let requestData;
+  try {
+    const rawBody = await request.text();
+    requestData = JSON.parse(rawBody);
+  } catch (error: any) {
+    console.error("Error parsing JSON:", error.message);
+    return NextResponse.json({
+      status: 400,
+      message: "Invalid JSON",
+      payload: error.message,
+    });
+  }
+
+  if (requestData) {
+    console.log("Request data after try-catch:", requestData);
+  } else {
+    console.log("Request data is undefined or null");
+  }
+
   const supabase = await createClient();
 
   // // Authenticate the current user
@@ -50,32 +69,12 @@ export async function POST(request: Request) {
   //   });
   // }
 
+  // const data = { test: "test" };
+
   // Insert the alert log into the database
   const { data, error } = await supabase
     .from("alert_logs")
-    .insert([
-      {
-        id: "550e8400-e29b-41d4-a716-446655440000",
-        user_id: "92bee9e3-6477-466b-85d9-4029ace0266e",
-        broker_id: "0fe95a99-4e51-4040-92fa-208296a6444e",
-        alert_payload: {
-          symbol: "AAPL",
-          price: 150.25,
-          action: "buy",
-          quantity: 10,
-        },
-
-        action: "triggered",
-        quantity: 10,
-        status: "completed",
-        broker_response: {
-          status: "success",
-          transaction_id: "1234567890",
-        },
-
-        created_at: "2023-10-01T12:00:00Z",
-      },
-    ])
+    .insert([{ ...requestData }])
     .select();
 
   // End the request if an error occurred

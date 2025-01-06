@@ -7,7 +7,7 @@
     "test": "npx playwright test",
     "test-reports": "npx playwright show-report",
     "test-watch": "npx playwright test --ui",
-    "gen-types": "supabase gen types typescript --project-id hbpqehngjozsjekmpdtr > database.types.ts"
+    "gen-types": "supabase gen types typescript --project-id hbpqehngjozsjekmpdtr > lib/database.types.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -21,12 +21,14 @@
     "autoprefixer": "10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "intro.js": "^7.2.0",
     "lucide-react": "^0.468.0",
     "next": "latest",
     "next-themes": "^0.4.3",
     "prettier": "^3.3.3",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "recharts": "^2.15.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.1",
@@ -38,5 +40,8 @@
     "tailwindcss": "3.4.17",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.7.2"
+  },
+  "overrides": {
+    "react-is": "^19.0.0-rc-69d4b800-20241021"
   }
 }

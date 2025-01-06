@@ -43,6 +43,25 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  let requestData;
+  try {
+    const rawBody = await request.text();
+    requestData = JSON.parse(rawBody);
+  } catch (error: any) {
+    console.error("Error parsing JSON:", error.message);
+    return NextResponse.json({
+      status: 400,
+      message: "Invalid JSON",
+      payload: error.message,
+    });
+  }
+
+  if (requestData) {
+    console.log("Request data after try-catch:", requestData);
+  } else {
+    console.log("Request data is undefined or null");
+  }
+
   // create supabase client
   const supabase = await createClient();
 
@@ -59,19 +78,7 @@ export async function POST(request: Request) {
   // insert broker credentials
   const { data, error } = await supabase
     .from("broker_credentials")
-    .insert([
-      {
-        id: crypto.randomUUID(),
-        user_id: "92bee9e3-6477-466b-85d9-4029ace0266e",
-        broker_name: "Broker Credentials with Extra Params",
-        api_key: "super new encrypted key",
-        api_secret: "super new encrypted secret",
-        extra_params: {
-          extra_param_1: "extra param 1",
-          extra_param_2: "extra param",
-        },
-      },
-    ])
+    .insert([{ ...requestData }])
     .select();
 
   // handle error

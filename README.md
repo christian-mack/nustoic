@@ -15,7 +15,7 @@ This project is a multi-tenant SaaS that bridges **TradingView alerts** to vario
 - **Frontend/Backend**: [Next.js](https://nextjs.org/) (React + API routes)
 - **Database & Auth**: [Supabase](https://supabase.com/) (Postgres + Row-Level Security)
 - **Broker APIs**: Various (OANDA, Alpaca, Binance, etc.)
-- **Deployment**: Vercel, or any Node-compatible environment.
+- **Deployment**: Vercel.
 
 ---
 
@@ -23,15 +23,14 @@ This project is a multi-tenant SaaS that bridges **TradingView alerts** to vario
 
 1. [Architecture](#architecture)
 2. [Schema Overview](#schema-overview)
-3. [Endpoints](#endpoints)
-4. [Local Development](#local-development)
-5. [Environment Variables](#environment-variables)
-6. [Database Setup & Migrations](#database-setup--migrations)
-7. [Authentication & Security](#authentication--security)
-8. [Usage & Billing Flows](#usage--billing-flows)
-9. [Testing](#testing)
-10. [Deployment](#deployment)
-11. [License](#license)
+3. [Local Development](#local-development)
+4. [Environment Variables](#environment-variables)
+5. [Database Setup & Migrations](#database-setup--migrations)
+6. [Authentication & Security](#authentication--security)
+7. [Usage & Billing Flows](#usage--billing-flows)
+8. [Testing](#testing)
+9. [Deployment](#deployment)
+10. [License](#license)
 
 ---
 
@@ -54,21 +53,6 @@ We have a rich set of tables:
 - **market_agents**, **agent_purchases**, **agent_reviews**, **agent_versions** (marketplace functionality)
 
 For a deep dive, see [`/docs/database-schema.sql`](./docs/database-schema.sql) or the Supabase migrations.
-
----
-
-## Endpoints
-
-**REST-like** endpoints are located in [`/pages/api`](./pages/api). Notable routes include:
-
-- `POST /api/auth/register`, `POST /api/auth/login`
-- `GET|POST|PATCH|DELETE /api/broker-credentials/...`
-- `GET|POST /api/alert-keys`, `GET|POST /api/webhook-endpoints`
-- `POST /api/tv-webhook/{endpointOrKeySecret}`
-- `GET|POST|PATCH /api/user-subscriptions`, `GET /api/subscription-plans`
-- `GET|POST|PATCH|DELETE /api/market-agents`, `api/agent-purchases`, `api/agent-reviews`, `api/agent-versions`, etc.
-
-See [Endpoints.md](./docs/Endpoints.md) for a complete list (or refer to the itemized list above).
 
 ---
 
